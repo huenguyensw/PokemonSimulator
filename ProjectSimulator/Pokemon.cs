@@ -36,7 +36,7 @@ namespace PokemonSimulator
 
         public ElementType Type { get;  }
 
-        public List<Attack> Attacks { get;  }
+        private List<Attack> Attacks;
 
         public Pokemon(string name, int level, ElementType type, List<Attack> attacks)
         {

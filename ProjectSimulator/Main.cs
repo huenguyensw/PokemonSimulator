@@ -51,28 +51,39 @@ namespace PokemonSimulator
 
         private void SeedData()
         {
-
-            var charmander = new FirePokemon("Charmander", 4, new List<Attack>
+            AddCharmander(4, new List<Attack>
             {
-                {new Attack("Flamethrower", ElementType.Fire, 12) },
-                { new Attack("Flamethrower", ElementType.Fire, 12)}
+                new Attack("Flamethrower", ElementType.Fire, 12),
+                 new Attack("Ember", ElementType.Fire, 6)
 
             });
-            team.Add(charmander);
 
-            var splashwave = new Attack("Splashwave", ElementType.Water, 15);
-            var drizzle = new Attack("Drizzle", ElementType.Water, 5);
+            AddSquirtle(3, new List<Attack>
+            {
+                new Attack("Splashwave", ElementType.Water, 15),
+                new Attack("Drizzle", ElementType.Water, 5)
+            });
 
-            var waterAttacks = new List<Attack> { splashwave, drizzle };
-            var squirtle = new WaterPokemon("Squirtle", 3, waterAttacks);
-            team.Add(squirtle);
+            AddBulbasaur(3, new List<Attack>
+            {
+                new Attack("Leafbladev", ElementType.Grass, 5),
+                new Attack("Sprout", ElementType.Grass, 10)
+            });
+        }
 
-            var leafbladev = new Attack("Leafbladev", ElementType.Grass, 5);
-            var sprout = new Attack("Sprout", ElementType.Grass, 10);
+        private void AddSquirtle(int level, List<Attack> attacks)
+        {
+            team.Add(new Squirtle(level, attacks));
+        }
 
-            var grassAttacks = new List<Attack> { leafbladev, sprout };
-            var bulbasaur = new GrassPokemon("Bulbasaur", 2, grassAttacks);
-            team.Add(bulbasaur);
+        private void AddCharmander(int level, List<Attack> attacks)
+        {
+            team.Add(new Charmander(level, attacks));
+        }
+
+        private void AddBulbasaur(int level, List<Attack> attacks)
+        {
+            team.Add(new Bulbasaur(level, attacks));
         }
     }
 }
