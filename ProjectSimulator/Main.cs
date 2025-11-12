@@ -6,9 +6,13 @@ namespace PokemonSimulator
         List<Pokemon> team = new List<Pokemon>();
         internal void Run()
         {
-            SeedData();
-            PrintPokemons();
-           
+            SeedData(); // fill team
+            PrintTeam(); //skriva ut all pokemons
+            BattleLoop();
+        }
+
+        private void BattleLoop()
+        {
             foreach (var pokemon in team)
             {
                 try
@@ -22,6 +26,10 @@ namespace PokemonSimulator
                         evolvable.Evolve();
                     }
                 }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
@@ -29,12 +37,11 @@ namespace PokemonSimulator
 
 
             }
-
         }
 
-        private void PrintPokemons()
+        private void PrintTeam()
         {
-            Console.WriteLine($"There are {team.Count} pokemons");
+            Console.WriteLine($"There are {team.Count} pokemons in team");
             for (int i = 0; i < team.Count; i++)
             {
                 Console.Write($"{i + 1}.");
@@ -44,25 +51,27 @@ namespace PokemonSimulator
 
         private void SeedData()
         {
-            var flamethrower = new Attack("Flamethrower", ElementType.Fire, 12);
-            var ember = new Attack("Ember", ElementType.Fire, 6);
 
-            var fireAttacks = new List<Attack> { flamethrower, ember };
-            var charmander = new FirePokemon("Charmander", fireAttacks, 4);
+            var charmander = new FirePokemon("Charmander", 4, new List<Attack>
+            {
+                {new Attack("Flamethrower", ElementType.Fire, 12) },
+                { new Attack("Flamethrower", ElementType.Fire, 12)}
+
+            });
             team.Add(charmander);
 
             var splashwave = new Attack("Splashwave", ElementType.Water, 15);
             var drizzle = new Attack("Drizzle", ElementType.Water, 5);
 
             var waterAttacks = new List<Attack> { splashwave, drizzle };
-            var squirtle = new WaterPokemon("Squirtle", waterAttacks, 3);
+            var squirtle = new WaterPokemon("Squirtle", 3, waterAttacks);
             team.Add(squirtle);
 
-            var leafblade = new Attack("Leafbladev", ElementType.Grass, 5);
+            var leafbladev = new Attack("Leafbladev", ElementType.Grass, 5);
             var sprout = new Attack("Sprout", ElementType.Grass, 10);
 
-            var grassAttacks = new List<Attack> { leafblade, sprout };
-            var bulbasaur = new GrassPokemon("Bulbasaur", grassAttacks, 2);
+            var grassAttacks = new List<Attack> { leafbladev, sprout };
+            var bulbasaur = new GrassPokemon("Bulbasaur", 2, grassAttacks);
             team.Add(bulbasaur);
         }
     }

@@ -8,10 +8,8 @@ namespace PokemonSimulator
 {
     internal class FirePokemon : Pokemon
     {
-        public FirePokemon(string name, List<Attack> attacks, int level) : base(attacks, level)
+        public FirePokemon(string name, int level, List<Attack> attacks ) : base(name, level, ElementType.Fire, attacks )
         {
-            Name = name;
-            Type = ElementType.Fire;
         }
     }
 }

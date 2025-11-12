@@ -8,10 +8,8 @@ namespace PokemonSimulator
 {
     internal class WaterPokemon : Pokemon
     {
-        public WaterPokemon(string name, List<Attack> attacks, int v) : base(attacks, v)
+        public WaterPokemon(string name, int level, List<Attack> attacks) : base(name, level, ElementType.Water, attacks)
         {
-            Name = name;
-            Type = ElementType.Water;
         }
     }
 }

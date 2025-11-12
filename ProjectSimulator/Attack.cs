@@ -19,6 +19,7 @@
             BasePower = basePower;
         }
 
+
         public void Use(int level)
         {
             int newPower = BasePower + level;

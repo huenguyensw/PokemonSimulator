@@ -8,9 +8,9 @@ namespace PokemonSimulator
 {
     internal class Charmander : FirePokemon, IEvolvable
     {
-        public Charmander(string name,List<Attack> attacks, int v) : base(name, attacks, v)
+        public Charmander(int level, List<Attack> attacks ) : base("Charmander", level, attacks )
         {
-            Name = "Charmander";
+            
         }
 
         public void Evolve()

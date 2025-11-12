@@ -8,9 +8,8 @@ namespace PokemonSimulator
 {
     internal class Squirtle : WaterPokemon, IEvolvable
     {
-        public Squirtle(string name, List<Attack> attacks, int v) : base(name, attacks, v)
+        public Squirtle(int v, List<Attack> attacks) : base("Squirtle", v, attacks)
         {
-            Name = "Squirtle";
         }
 
         public void Evolve()

@@ -8,9 +8,9 @@ namespace PokemonSimulator
 {
     internal class Bulbasaur : GrassPokemon, IEvolvable
     {
-        public Bulbasaur(string name, List<Attack> attacks, int v) : base(name,attacks, v)
+        public Bulbasaur(int v, List<Attack> attacks ) : base("Bulbasaur", v, attacks)
         {
-            Name = "Bulbasaur";
+            
         }
         public void Evolve()
         {
