@@ -12,12 +12,5 @@ namespace PokemonSimulator
         {
             
         }
-        //public void Evolve()
-        //{
-        //    string currentName = Name;
-        //    Name = "Charmeleon";
-        //    Level += 10;
-        //    Console.WriteLine($"{currentName} is evolving... Now it is a {Name} and its level is {Level}");
-        //}
     }
 }

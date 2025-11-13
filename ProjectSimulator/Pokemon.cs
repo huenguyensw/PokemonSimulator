@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,6 +50,10 @@ namespace PokemonSimulator
         public void RandomAttack()
         {
             // Väljer en slumpmässig attack från listan och anropar dess .Use-method
+            // Pick a random attack from list of attacks
+            var random = new Random();
+            int index = random.Next(Attacks.Count);
+            Attacks[index].Use(Level);
         }
 
         public void Attack()
@@ -57,10 +62,10 @@ namespace PokemonSimulator
             bool success = false;
             do
             {
-                Console.WriteLine($"Enter a number to choose attack for {Name}");
+                Console.WriteLine($"Enter a number to execute attack for {Name}");
                 for (int i = 0; i < Attacks.Count; i++)
                 {
-                    Console.WriteLine($"{i}.{Attacks[i].Name}");
+                    Console.WriteLine($"{i+1}.{Attacks[i].Name}");
                 }
 
                 string opt = Console.ReadLine()!;
@@ -68,11 +73,11 @@ namespace PokemonSimulator
                     Console.WriteLine("Invalid option. Please choose again");
                 if (int.TryParse(opt, out int val))
                 {
-                    if (val < 0 || val >= Attacks.Count)
+                    if (val < 1 || val > Attacks.Count)
                         Console.WriteLine("Invalid option. Please choose again");
                     else
                     {
-                        Attacks[val].Use(Level);
+                        Attacks[val-1].Use(Level);
                         success = true;
                     }
                 } else
@@ -91,11 +96,11 @@ namespace PokemonSimulator
 
         public void Print()
         {
-            Console.WriteLine($"Name: {Name}, {Environment.NewLine} Type: {Type},{Environment.NewLine} Level: {Level}, ");
+            Console.WriteLine($"Name: {Name} {Environment.NewLine} Type: {Type} {Environment.NewLine} Level: {Level}");
             Console.Write($" Attacks: ");
-            for (int i = 0; i < Attacks.Count; i++)
+            foreach (var attack in Attacks)
             {
-                Console.Write($"{Attacks[i].Name}, ");
+                Console.Write($"{attack.Name}, ");
             }
             Console.WriteLine();
 

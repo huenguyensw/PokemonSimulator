@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace PokemonSimulator
 {
     internal class Main
@@ -6,8 +8,8 @@ namespace PokemonSimulator
         List<Pokemon> team = new List<Pokemon>();
         internal void Run()
         {
-            SeedData(); // fill team
-            PrintTeam(); //skriva ut all pokemons
+            SeedData(); // fylla team data
+            PrintTeam(); //skriva ut alla pokemon
             BattleLoop();
         }
 
@@ -19,6 +21,7 @@ namespace PokemonSimulator
                 {
                     Console.WriteLine("");
                     pokemon.Attack();
+                    //pokemon.RandomAttack();
                     pokemon.RaiseLevel();
 
                     if (pokemon is IEvolvable evolvable)
@@ -54,20 +57,25 @@ namespace PokemonSimulator
             AddCharmander(4, new List<Attack>
             {
                 new Attack("Flamethrower", ElementType.Fire, 12),
-                 new Attack("Ember", ElementType.Fire, 6)
-
+                new Attack("Ember", ElementType.Fire, 6),
+                new Attack("Fire Spin", ElementType.Fire, 4),
+                new Attack("Heat Wave", ElementType.Fire, 8)
             });
 
             AddSquirtle(3, new List<Attack>
             {
-                new Attack("Splashwave", ElementType.Water, 15),
-                new Attack("Drizzle", ElementType.Water, 5)
+                new Attack("Water Gun", ElementType.Water, 15),
+                new Attack("Bubble Beam", ElementType.Water, 5),
+                new Attack("Aqua Tail", ElementType.Water, 14),
+                new Attack("Hydro Pump", ElementType.Water, 18),
             });
 
             AddBulbasaur(3, new List<Attack>
             {
-                new Attack("Leafbladev", ElementType.Grass, 5),
-                new Attack("Sprout", ElementType.Grass, 10)
+                new Attack("Vine Whip", ElementType.Grass, 5),
+                new Attack("Razor Leaf", ElementType.Grass, 10),
+                new Attack("Solar Beam", ElementType.Grass, 7),
+                new Attack("Seed Bomb", ElementType.Grass, 5),
             });
         }
 
