@@ -2,11 +2,28 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PokemonSimulator
 {
+    internal static class PokemonHelper
+    {
+        public static Pokemon EvolveTo(this IEvolvable pokemon, string newName, int levelIncrease)
+        {
+            if (pokemon is Pokemon p)
+            {
+                string oldName = p.Name;
+                p.Name = newName;
+                p.Level += levelIncrease;
+                Console.WriteLine($"{oldName} is evolving...Now it is a { p.Name } and its level is { p.Level}");
+                return p;
+            }
+            throw new InvalidOperationException("This object is not a Pokémon.");
+        }
+    }
     internal abstract class Pokemon
     {
         private string _name;
@@ -58,6 +75,12 @@ namespace PokemonSimulator
             do
             {
                 Console.WriteLine($"Enter a number to choose attack for {Name}");
+
+                //foreach (var attack in Attacks)
+                //{
+                //    Console.WriteLine($"{i}.{attack.Name}");
+
+                //}
                 for (int i = 0; i < Attacks.Count; i++)
                 {
                     Console.WriteLine($"{i}.{Attacks[i].Name}");

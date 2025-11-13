@@ -14,10 +14,10 @@ namespace PokemonSimulator
 
         public void Evolve()
         {
-            string currentName = Name;
-            Name = "Charmeleon";
+            string oldName = Name;
+            Name = "Wartortle";
             Level += 10;
-            Console.WriteLine($"{currentName} is evolving... Now it is a {Name} and its level is {Level}");
+            Console.WriteLine($"{oldName} is evolving... Now it is a {Name} and its level is {Level}");
         }
     }
 }

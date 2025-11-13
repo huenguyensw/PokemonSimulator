@@ -9,6 +9,8 @@ namespace PokemonSimulator
             SeedData(); // fill team
             PrintTeam(); //skriva ut all pokemons
             BattleLoop();
+            PrintTeam(); //skriva ut all pokemons
+
         }
 
         private void BattleLoop()
