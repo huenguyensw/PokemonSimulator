@@ -1,4 +1,7 @@
-﻿
+﻿using PokemonSimulator.Attack;
+using PokemonSimulator.FirePokemon.Evolutions;
+using PokemonSimulator.GrassPokemon.Evolutions;
+using PokemonSimulator.WaterPokemon.Evolutions;
 using System;
 
 namespace PokemonSimulator
@@ -11,23 +14,25 @@ namespace PokemonSimulator
             SeedData(); // fylla team data
             PrintTeam(); //skriva ut alla pokemon
             BattleLoop();
+            //AddAttackLegen();
+        }
+
+        private void AddAttackLegen()
+        {
+            AttackBase attack = new AttackBase("Firethrower", ElementType.Fire, 10);
+            LegendaryAttack legenattack = new LegendaryAttack("Legenattack", ElementType.Fire, 20);
         }
 
         private void BattleLoop()
         {
-            foreach (var pokemon in team)
+            for (int i = 0; i< team.Count; i++)
             {
                 try
                 {
                     Console.WriteLine("");
-                    pokemon.Attack();
-                    //pokemon.RandomAttack();
-                    pokemon.RaiseLevel();
-
-                    if (pokemon is IEvolvable evolvable)
-                    {
-                        evolvable.Evolve();
-                    }
+                    team[i] = team[i].RaiseLevel();
+                    team[i].Speak();
+                    team[i].RandomAttack();
                 }
                 catch (ArgumentException ex)
                 {
@@ -54,42 +59,42 @@ namespace PokemonSimulator
 
         private void SeedData()
         {
-            AddCharmander(4, new List<Attack>
+            AddCharmander(16, new List<AttackBase>
             {
-                new Attack("Flamethrower", ElementType.Fire, 12),
-                new Attack("Ember", ElementType.Fire, 6),
-                new Attack("Fire Spin", ElementType.Fire, 4),
-                new Attack("Heat Wave", ElementType.Fire, 8)
+                new AttackBase("Flamethrower", ElementType.Fire, 12),
+                new AttackBase("Ember", ElementType.Fire, 6),
+                new AttackBase("Fire Spin", ElementType.Fire, 4),
+                new AttackBase("Heat Wave", ElementType.Fire, 8)
             });
 
-            AddSquirtle(3, new List<Attack>
+            AddSquirtle(3, new List<AttackBase>
             {
-                new Attack("Water Gun", ElementType.Water, 15),
-                new Attack("Bubble Beam", ElementType.Water, 5),
-                new Attack("Aqua Tail", ElementType.Water, 14),
-                new Attack("Hydro Pump", ElementType.Water, 18),
+                new AttackBase("Water Gun", ElementType.Water, 15),
+                new AttackBase("Bubble Beam", ElementType.Water, 5),
+                new AttackBase("Aqua Tail", ElementType.Water, 14),
+                new AttackBase("Hydro Pump", ElementType.Water, 18),
             });
 
-            AddBulbasaur(3, new List<Attack>
+            AddBulbasaur(3, new List<AttackBase>
             {
-                new Attack("Vine Whip", ElementType.Grass, 5),
-                new Attack("Razor Leaf", ElementType.Grass, 10),
-                new Attack("Solar Beam", ElementType.Grass, 7),
-                new Attack("Seed Bomb", ElementType.Grass, 5),
+                new AttackBase("Vine Whip", ElementType.Grass, 5),
+                new AttackBase("Razor Leaf", ElementType.Grass, 10),
+                new AttackBase("Solar Beam", ElementType.Grass, 7),
+                new AttackBase("Seed Bomb", ElementType.Grass, 5),
             });
         }
 
-        private void AddSquirtle(int level, List<Attack> attacks)
+        private void AddSquirtle(int level, List<AttackBase> attacks)
         {
             team.Add(new Squirtle(level, attacks));
         }
 
-        private void AddCharmander(int level, List<Attack> attacks)
+        private void AddCharmander(int level, List<AttackBase> attacks)
         {
             team.Add(new Charmander(level, attacks));
         }
 
-        private void AddBulbasaur(int level, List<Attack> attacks)
+        private void AddBulbasaur(int level, List<AttackBase> attacks)
         {
             team.Add(new Bulbasaur(level, attacks));
         }

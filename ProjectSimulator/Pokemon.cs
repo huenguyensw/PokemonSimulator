@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using PokemonSimulator.Attack;
 
 namespace PokemonSimulator
 {
@@ -35,11 +36,11 @@ namespace PokemonSimulator
             }
         }
 
-        public ElementType Type { get;  }
+        public ElementType Type { get; }
 
-        private List<Attack> Attacks;
+        protected List<AttackBase> Attacks;
 
-        public Pokemon(string name, int level, ElementType type, List<Attack> attacks)
+        public Pokemon(string name, int level, ElementType type, List<AttackBase> attacks)
         {
             Attacks = attacks;
             Level = level;
@@ -65,7 +66,7 @@ namespace PokemonSimulator
                 Console.WriteLine($"Enter a number to execute attack for {Name}");
                 for (int i = 0; i < Attacks.Count; i++)
                 {
-                    Console.WriteLine($"{i+1}.{Attacks[i].Name}");
+                    Console.WriteLine($"{i + 1}.{Attacks[i].Name}");
                 }
 
                 string opt = Console.ReadLine()!;
@@ -77,21 +78,23 @@ namespace PokemonSimulator
                         Console.WriteLine("Invalid option. Please choose again");
                     else
                     {
-                        Attacks[val-1].Use(Level);
+                        Attacks[val - 1].Use(Level);
                         success = true;
                     }
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Invalid option. Please choose again");
                 }
             } while (!success);
         }
 
-        public void RaiseLevel()
+        public virtual Pokemon RaiseLevel()
         {
             //Öka nivån på Pokemon och skriver ut att den har levlat upp
             Level += 1;
             Console.WriteLine($"{Name} har leveled up! New level: {Level}");
+            return this;
         }
 
         public void Print()
@@ -105,6 +108,12 @@ namespace PokemonSimulator
             Console.WriteLine();
 
         }
+
+        public virtual void Speak()
+        {
+            Console.WriteLine($"{Name} says: Char char!");
+        }
+
     }
 
 }
